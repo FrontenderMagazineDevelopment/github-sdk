@@ -1,0 +1,13 @@
+{
+  "presets": [
+    ["env", {
+      "targets": {
+        "node": "current",
+        "uglify": true,
+      },
+      "modules": "commonjs",
+      "debug": false
+    }],
+    "stage-0"
+  ]
+}
