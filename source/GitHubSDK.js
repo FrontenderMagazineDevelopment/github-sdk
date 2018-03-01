@@ -19,9 +19,7 @@ export default class GitHubSDK {
    */
   constructor(token) {
 
-    this.config = {
-      org: 'FrontenderMagazineDevelopment'
-    };
+    if (token === undefined) throw new Error(GitHubSDK.message.key);
 
     this.urls = {
       api: 'https://api.github.com/',
@@ -30,7 +28,7 @@ export default class GitHubSDK {
     };
 
     this.headers = {
-      Authorization: `token ${ token || process.env.GITHUB_SECRET_TOKEN }`,
+      Authorization: `token ${ token }`,
       Accept: 'application/vnd.github.v3+json',
       userAgent: `UserCrowler/${ PACKAGE.version }`,
       'Content-Type': 'application/json',
@@ -43,8 +41,10 @@ export default class GitHubSDK {
    * @type {Object}
    */
   static message = {
-    key: 'You need API key',
+    key: 'You need to pass your app token',
     fail: 'Failed fetching page',
+    org: 'Organization name missing in the arguments list',
+    name: 'Repository name missing in the arguments list',
   };
 
   /**
@@ -52,31 +52,34 @@ export default class GitHubSDK {
    * @namespace GitHubSDK
    *
    * @param  {string}  name                  Repository name
-   * @param  {string}  [desription=null]     Repository description
+   * @param  {string}  [description=null]     Repository description
    * @param  {string}  [homepage=null]       Link to some related resourse
    * @param  {string}  [org=this.config.org] Organization name
-   * @return {Promise<Repository>}                 Repository object
+   * @return {Promise<Repository>}           Repository object
    */
   async create({
     name,
-    desription = null,
+    org,
+    description = null,
     homepage = null,
-    org = this.config.org,
   }) {
+
+    if (typeof name !== 'string' || name.trim().length === 0) throw new Error(GitHubSDK.message.name);
+    if (typeof org !== 'string' || org.trim().length === 0) throw new Error(GitHubSDK.message.org);
+
     const options = {
       method: 'POST',
       headers: this.headers,
       body: JSON.stringify({
         name,
-        desription,
+        description,
         homepage,
       }),
     };
-    const url = `${this.urls.api}orgs/${this.config.org}/repos`;
-    console.log(this.headers, url);
+
+    const url = `${this.urls.api}orgs/${org}/repos`;
     const response = await fetch(url, options);
     const json = await response.json();
-    console.log(json);
     if (!response.ok) {
       throw new ErrorServerResponse(response.status, response.statusText, json);
     }
