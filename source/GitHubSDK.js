@@ -56,6 +56,7 @@ export default class GitHubSDK {
    * Uload file to repository
    * @namespace GitHubSDK
    * @method upload
+   * @inner
    *
    * @throws {ValidationError}                    - Error of fields validation
    * @throws {ErrorServerResponse}                - Server error
@@ -69,6 +70,8 @@ export default class GitHubSDK {
    * @return {Promise<Content>}                   - uploaded content data
    *
    * @example <caption>Upload binary file</caption>
+   * import fs from 'fs';
+   * import GitHubSDK from '@frontender-magazine/github-sdk';
    * (async()=>{
    *   try {
    *     const github = new GitHubSDK('b8f921864bd9a9fb6585b10e6534baa37c4d45fe');
@@ -86,6 +89,8 @@ export default class GitHubSDK {
    * })();
    *
    * @example <caption>Upload text file</caption>
+   * import { Base64 } from 'js-base64';
+   * import GitHubSDK from '@frontender-magazine/github-sdk';
    * (async()=>{
    *   try {
    *     const github = new GitHubSDK('b8f921864bd9a9fb6585b10e6534baa37c4d45fe');
@@ -149,6 +154,7 @@ export default class GitHubSDK {
    * Create repository in the organization
    * @namespace GitHubSDK
    * @method create
+   * @inner
    *
    * @throws {ValidationError}                        - Error of fields validation
    * @throws {ErrorServerResponse}                    - Server error
@@ -198,6 +204,7 @@ export default class GitHubSDK {
    * Search for users
    * @namespace GitHubSDK
    * @method searchForUsers
+   * @inner
    *
    * @param {Array} keywords
    * @return {Promise}
@@ -212,6 +219,7 @@ export default class GitHubSDK {
    * Search for user
    * @namespace GitHubSDK
    * @method searchForUser
+   * @inner
    *
    * @param {String} keyword
    * @return {Promise}
@@ -233,6 +241,7 @@ export default class GitHubSDK {
    * Get user information
    * @namespace GitHubSDK
    * @method getUser
+   * @inner
    *
    * @param {String} login
    * @return {Promise}

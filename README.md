@@ -15,12 +15,7 @@ JavaScript SDK for [Github API](https://developer.github.com/v3/). Contain only 
 -   [ErrorServerResponse](#errorserverresponse)
 -   [GitHubSDK](#githubsdk)
     -   [message](#message)
--   [upload](#upload)
--   [create](#create)
--   [searchForUsers](#searchforusers)
--   [searchForUser](#searchforuser)
 -   [Repository](#repository)
--   [getUser](#getuser)
 -   [Content](#content)
 -   [ValidationError](#validationerror)
 
@@ -48,105 +43,6 @@ SDK for GitHub API
 
 Messages of GitHub SDK
 
-## upload
-
-Uload file to repository
-
-**Parameters**
-
--   `props` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** upload props
-    -   `props.owner` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** organization or user name
-    -   `props.repo` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** repository name
-    -   `props.path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** relative file path with file name in it
-    -   `props.message` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** commit message
-    -   `props.content` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** base64 encoded content
-    -   `props.branch` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name of the branch (optional, default `'master'`)
-
-**Examples**
-
-_Upload binary file_
-
-```javascript
-(async()=>{
-  try {
-    const github = new GitHubSDK('b8f921864bd9a9fb6585b10e6534baa37c4d45fe');
-    const image = fs.readFileSync('/path/image.jpg', 'base64');
-    const content = await github.upload({
-      owner: 'FrontenderMagazine',
-      repo: 'article',
-      path: 'images/image.jpg',
-      message: 'Uploaded image.jpg',
-      content: image,
-    });
-  } catch (error) {
-    console.log(error.message);
-  }
-})();
-```
-
-_Upload text file_
-
-```javascript
-(async()=>{
-  try {
-    const github = new GitHubSDK('b8f921864bd9a9fb6585b10e6534baa37c4d45fe');
-    const readme = Base64.btoa('# Title');
-    const content = await github.upload({
-      owner: 'FrontenderMagazine',
-      repo: 'article',
-      path: 'README.md',
-      message: 'Uploaded README.md',
-      content: readme,
-    });
-  } catch (error) {
-    console.log(error.message);
-  }
-})();
-```
-
--   Throws **[ValidationError](#validationerror)** Error of fields validation
--   Throws **[ErrorServerResponse](#errorserverresponse)** Server error
-
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Content](#content)>** uploaded content data
-
-## create
-
-Create repository in the organization
-
-**Parameters**
-
--   `props` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Options
-    -   `props.name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Repository name
-    -   `props.description` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Repository description (optional, default `null`)
-    -   `props.homepage` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Link to some related resourse (optional, default `null`)
-    -   `props.org` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Organization name
-
-
--   Throws **[ValidationError](#validationerror)** Error of fields validation
--   Throws **[ErrorServerResponse](#errorserverresponse)** Server error
-
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Repository](#repository)>** Repository object
-
-## searchForUsers
-
-Search for users
-
-**Parameters**
-
--   `keywords` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** 
-
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
-
-## searchForUser
-
-Search for user
-
-**Parameters**
-
--   `keyword` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
-
 ## Repository
 
 -   **See: <https://developer.github.com/v3/repos/#response-2>**
@@ -154,16 +50,6 @@ Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 Repository object
 
 Type: [Repository](#repository)
-
-## getUser
-
-Get user information
-
-**Parameters**
-
--   `login` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
 
 ## Content
 
