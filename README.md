@@ -14,13 +14,15 @@ JavaScript SDK for [Github API](https://developer.github.com/v3/). Contain only 
 
 -   [ErrorServerResponse](#errorserverresponse)
 -   [GitHubSDK](#githubsdk)
--   [GitHubSDK](#githubsdk-1)
--   [GitHubSDK](#githubsdk-2)
--   [GitHubSDK](#githubsdk-3)
--   [GitHubSDK](#githubsdk-4)
--   [GitHubSDK](#githubsdk-5)
--   [GitHubSDK](#githubsdk-6)
+    -   [message](#message)
+-   [upload](#upload)
+-   [create](#create)
+-   [searchForUsers](#searchforusers)
+-   [searchForUser](#searchforuser)
 -   [Repository](#repository)
+-   [getUser](#getuser)
+-   [Content](#content)
+-   [ValidationError](#validationerror)
 
 ## ErrorServerResponse
 
@@ -36,30 +38,55 @@ Custom error message for abstract server response
 
 -   **See: <https://developer.github.com/v3/>**
 
-SDK for mercury api
+SDK for GitHub API
 
 **Parameters**
 
 -   `token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** github app token
 
-## GitHubSDK
+### message
 
-Messages of mercury SDK
+Messages of GitHub SDK
 
-## GitHubSDK
+## upload
+
+Uload file to repository
+
+**Parameters**
+
+-   `props` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** upload props
+    -   `props.owner` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** organization or user name
+    -   `props.repo` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** repository name
+    -   `props.path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** relative file path with file name in it
+    -   `props.message` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** commit message
+    -   `props.content` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** base64 encoded content
+    -   `props.branch` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name of the branch (optional, default `'master'`)
+
+
+-   Throws **[ValidationError](#validationerror)** Error of fields validation
+-   Throws **[ErrorServerResponse](#errorserverresponse)** Server error
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Content](#content)>** uploaded content data
+
+## create
 
 Create repository in the organization
 
 **Parameters**
 
--   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Repository name
--   `description` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Repository description (optional, default `null`)
--   `homepage` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Link to some related resourse (optional, default `null`)
--   `org` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Organization name (optional, default `this.config.org`)
+-   `props` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Options
+    -   `props.name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Repository name
+    -   `props.description` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Repository description (optional, default `null`)
+    -   `props.homepage` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Link to some related resourse (optional, default `null`)
+    -   `props.org` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Organization name
+
+
+-   Throws **[ValidationError](#validationerror)** Error of fields validation
+-   Throws **[ErrorServerResponse](#errorserverresponse)** Server error
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Repository](#repository)>** Repository object
 
-## GitHubSDK
+## searchForUsers
 
 Search for users
 
@@ -69,33 +96,13 @@ Search for users
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
 
-## GitHubSDK
-
-Search for users
-
-**Parameters**
-
--   `keywords` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** 
-
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
-
-## GitHubSDK
+## searchForUser
 
 Search for user
 
 **Parameters**
 
 -   `keyword` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
-
-## GitHubSDK
-
-Get user information
-
-**Parameters**
-
--   `login` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
 
@@ -106,3 +113,31 @@ Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 Repository object
 
 Type: [Repository](#repository)
+
+## getUser
+
+Get user information
+
+**Parameters**
+
+-   `login` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
+
+## Content
+
+-   **See: <https://developer.github.com/v3/repos/contents/#response-2>**
+
+Content object
+
+Type: [Content](#content)
+
+## ValidationError
+
+Custom error message for validation error
+
+**Parameters**
+
+-   `statusCode` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** http status code
+-   `statusText` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** http status code text
+-   `message` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | null)** error details (optional, default `null`)

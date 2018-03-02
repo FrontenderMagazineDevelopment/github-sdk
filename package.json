@@ -38,9 +38,7 @@
   },
   "keywords": [
     "Frontender Magazine",
-    "mercury",
-    "web parser",
-    "Mercury Web Parser"
+    "GitHub"
   ],
   "author": "Anton Nremtsev <thesilentimp@gmail.com>",
   "license": "CC-BY-4.0",
@@ -53,7 +51,10 @@
     "collectCoverage": true
   },
   "dependencies": {
-    "isomorphic-fetch": "^2.2.1"
+    "isomorphic-fetch": "^2.2.1",
+    "joi": "^13.1.2",
+    "js-base64": "^2.4.3",
+    "urlencode": "^1.1.0"
   },
   "devDependencies": {
     "@plasma-platform/tm-message-hook": "^1.0.1",
