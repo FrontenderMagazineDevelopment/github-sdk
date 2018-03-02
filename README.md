@@ -62,6 +62,47 @@ Uload file to repository
     -   `props.content` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** base64 encoded content
     -   `props.branch` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name of the branch (optional, default `'master'`)
 
+**Examples**
+
+_Upload binary file_
+
+```javascript
+(async()=>{
+  try {
+    const github = new GitHubSDK('b8f921864bd9a9fb6585b10e6534baa37c4d45fe');
+    const image = fs.readFileSync('/path/image.jpg', 'base64');
+    const content = await github.upload({
+      owner: 'FrontenderMagazine',
+      repo: 'article',
+      path: 'images/image.jpg',
+      message: 'Uploaded image.jpg',
+      content: image,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+})();
+```
+
+_Upload text file_
+
+```javascript
+(async()=>{
+  try {
+    const github = new GitHubSDK('b8f921864bd9a9fb6585b10e6534baa37c4d45fe');
+    const readme = Base64.btoa('# Title');
+    const content = await github.upload({
+      owner: 'FrontenderMagazine',
+      repo: 'article',
+      path: 'README.md',
+      message: 'Uploaded README.md',
+      content: readme,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+})();
+```
 
 -   Throws **[ValidationError](#validationerror)** Error of fields validation
 -   Throws **[ErrorServerResponse](#errorserverresponse)** Server error
