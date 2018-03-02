@@ -19,7 +19,6 @@ JavaScript SDK for [Github API](https://developer.github.com/v3/). Contain only 
 -   [searchForUsers](#searchforusers)
 -   [searchForUser](#searchforuser)
 -   [getUser](#getuser)
--   [null-null](#null-null)
 -   [User](#user)
 -   [Content](#content)
 -   [Repository](#repository)
@@ -133,13 +132,13 @@ Search for users
 
 **Parameters**
 
--   `null-null` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** Keywords
+-   `keywordsList` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** Keywords array
 
 
 -   Throws **ValidationError** Error of fields validation
 -   Throws **[ErrorServerResponse](#errorserverresponse)** Server error
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;Users>** 
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;Users>** array of users
 
 ## searchForUser
 
@@ -147,13 +146,13 @@ Search for user
 
 **Parameters**
 
--   `keyword` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `keyword` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** login to search
 
 
 -   Throws **ValidationError** Error of fields validation
 -   Throws **[ErrorServerResponse](#errorserverresponse)** Server error
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[User](#user)>** user
 
 ## getUser
 
@@ -168,16 +167,6 @@ Get user details
 -   Throws **[ErrorServerResponse](#errorserverresponse)** Server error
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[User](#user)>** — user representation
-
-## null-null
-
-Users object
-
-Type: Users
-
-**Parameters**
-
--   `null-null` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[User](#user)>** Users list
 
 ## User
 
