@@ -1,0 +1,46 @@
+{
+  "total_count": 2,
+  "incomplete_results": false,
+  "items": [
+    {
+      "login": "SilentImp",
+      "id": 217308,
+      "avatar_url": "https://avatars0.githubusercontent.com/u/217308?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/SilentImp",
+      "html_url": "https://github.com/SilentImp",
+      "followers_url": "https://api.github.com/users/SilentImp/followers",
+      "following_url": "https://api.github.com/users/SilentImp/following{/other_user}",
+      "gists_url": "https://api.github.com/users/SilentImp/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/SilentImp/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/SilentImp/subscriptions",
+      "organizations_url": "https://api.github.com/users/SilentImp/orgs",
+      "repos_url": "https://api.github.com/users/SilentImp/repos",
+      "events_url": "https://api.github.com/users/SilentImp/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/SilentImp/received_events",
+      "type": "User",
+      "site_admin": false,
+      "score": 98.55382
+    },
+    {
+      "login": "SilentImperium",
+      "id": 14233988,
+      "avatar_url": "https://avatars1.githubusercontent.com/u/14233988?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/SilentImperium",
+      "html_url": "https://github.com/SilentImperium",
+      "followers_url": "https://api.github.com/users/SilentImperium/followers",
+      "following_url": "https://api.github.com/users/SilentImperium/following{/other_user}",
+      "gists_url": "https://api.github.com/users/SilentImperium/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/SilentImperium/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/SilentImperium/subscriptions",
+      "organizations_url": "https://api.github.com/users/SilentImperium/orgs",
+      "repos_url": "https://api.github.com/users/SilentImperium/repos",
+      "events_url": "https://api.github.com/users/SilentImperium/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/SilentImperium/received_events",
+      "type": "Organization",
+      "site_admin": false,
+      "score": 7.73553
+    }
+  ]
+}

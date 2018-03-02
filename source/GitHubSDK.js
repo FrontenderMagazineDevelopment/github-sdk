@@ -1,13 +1,14 @@
-import fs from 'fs';
 import 'babel-polyfill';
 import Joi from 'joi';
 import fetch from 'isomorphic-fetch';
-import { Base64 } from 'js-base64';
 import ErrorServerResponse from './ErrorServerResponse';
-import ValidationError from './ValidationError';
 
-import uploadSchema from './schema/upload.js';
-import createSchema from './schema/create.js';
+import keywordsSchema from './schema/keywordsSchema';
+import constructorSchema from './schema/constructorSchema';
+import uploadSchema from './schema/upload';
+import createSchema from './schema/create';
+import usersSchema from './schema/users';
+import userSchema from './schema/user';
 
 const PACKAGE = require('../package.json');
 
@@ -26,37 +27,30 @@ export default class GitHubSDK {
    */
   constructor(token) {
 
-    if (token === undefined) throw new Error(GitHubSDK.message.token);
+    Joi.validate(
+      token,
+      constructorSchema,
+      error => {
+        if (error !== null) throw error;
+      },
+    );
 
     this.urls = {
       api: 'https://api.github.com/',
-      search_users: 'search/users',
-      users: 'users/',
     };
 
     this.headers = {
-      Authorization: `token ${ token }`,
+      Authorization: `token ${token}`,
       Accept: 'application/vnd.github.v3+json',
-      userAgent: `UserCrowler/${ PACKAGE.version }`,
+      userAgent: `UserCrowler/${PACKAGE.version}`,
       'Content-Type': 'application/json',
     };
   }
 
   /**
-   * Messages of GitHub SDK
-   * @inner
-   * @type {Object}
-   */
-  static message = {
-    token: 'You need to pass your app token',
-    fail: 'Failed fetching page',
-  };
-
-  /**
    * Uload file to repository
    * @namespace GitHubSDK
    * @method upload
-   * @inner
    *
    * @throws {ValidationError}                    - Error of fields validation
    * @throws {ErrorServerResponse}                - Server error
@@ -109,32 +103,19 @@ export default class GitHubSDK {
    */
   async upload(props) {
 
-    const {
-      owner,
-      repo,
-      path,
-      message,
-      content,
-      branch,
-    } = props;
+    Joi.validate(
+      props,
+      uploadSchema,
+      error => {
+        if (error !== null) throw error;
+      },
+    );
 
-    Joi.validate({
-      owner,
-      repo,
-      path,
-      message,
-      content,
-      branch,
-    }, uploadSchema, (error, value) => {
-      if (error !== null) throw error;
-    });
+    const { owner, repo, path, message, content, branch } = props;
 
     const options = {
       method: 'PUT',
-      headers: {
-        ...this.headers,
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
+      headers: this.headers,
       body: JSON.stringify({
         path,
         message,
@@ -145,16 +126,19 @@ export default class GitHubSDK {
 
     const url = `${this.urls.api}repos/${owner}/${repo}/contents/${path}`;
     const response = await fetch(url, options);
-    const json = await response.json();
+    let json;
+    try {
+      json = await response.json();
+    } catch (error) {
+      throw new ErrorServerResponse(response.status, response.statusText);
+    }
     if (response.ok) return json;
     throw new ErrorServerResponse(response.status, response.statusText, json);
   }
 
   /**
    * Create repository in the organization
-   * @namespace GitHubSDK
    * @method create
-   * @inner
    *
    * @throws {ValidationError}                        - Error of fields validation
    * @throws {ErrorServerResponse}                    - Server error
@@ -167,21 +151,15 @@ export default class GitHubSDK {
    */
   async create(props) {
 
-    const {
-      name,
-      org,
-      description,
-      homepage,
-    } = props;
+    Joi.validate(
+      props,
+      createSchema,
+      error => {
+        if (error !== null) throw error;
+      },
+    );
 
-    Joi.validate({
-      name,
-      org,
-      description,
-      homepage,
-    }, createSchema, (error, value) => {
-      if (error !== null) throw error;
-    });
+    const { name, org, description, homepage } = props;
 
     const options = {
       method: 'POST',
@@ -195,69 +173,130 @@ export default class GitHubSDK {
 
     const url = `${this.urls.api}orgs/${org}/repos`;
     const response = await fetch(url, options);
-    const json = await response.json();
+    let json;
+    try {
+      json = await response.json();
+    } catch (error) {
+      throw new ErrorServerResponse(response.status, response.statusText);
+    }
     if (response.ok) return json;
     throw new ErrorServerResponse(response.status, response.statusText, json);
   }
 
   /**
    * Search for users
-   * @namespace GitHubSDK
    * @method searchForUsers
-   * @inner
    *
-   * @param {Array} keywords
-   * @return {Promise}
+   * @throws {ValidationError}     - Error of fields validation
+   * @throws {ErrorServerResponse} - Server error
+   * @param {Array<string>}        - Keywords
+   * @return {Promise<Users>}
    */
   searchForUsers(keywordsList) {
-    const keywords = (!Array.isArray(keywordsList) && typeof keywordsList === 'string') ? new Array(keywordsList) : keywordsList;
-    const promises = keywords.map((keyword)=>this.searchForUser(keyword));
+
+    Joi.validate(
+      keywordsList,
+      keywordsSchema,
+      error => {
+        if (error !== null) throw error;
+      },
+    );
+
+    const keywords =
+      !Array.isArray(keywordsList) && typeof keywordsList === 'string'
+        ? new Array(keywordsList)
+        : keywordsList;
+    const promises = keywords.map(keyword => this.searchForUser(keyword));
     return Promise.all(promises);
   }
 
   /**
    * Search for user
-   * @namespace GitHubSDK
    * @method searchForUser
-   * @inner
    *
+   * @throws {ValidationError}     - Error of fields validation
+   * @throws {ErrorServerResponse} - Server error
    * @param {String} keyword
    * @return {Promise}
    */
   async searchForUser(keyword) {
+
+    Joi.validate(
+      keyword,
+      usersSchema,
+      error => {
+        if (error !== null) throw error;
+      },
+    );
+
     const options = {
       method: 'GET',
       headers: this.headers,
     };
-    const response = await fetch(`${this.urls.api + this.urls.search_users  }?q=${encodeURIComponent(keyword)}`, options);
-    if (response.ok) {
-      const user = await response.json();
-      return user.items;
+
+    const url = `${this.urls.api}search/users?q=${encodeURIComponent(keyword)}`;
+    const response = await fetch(url, options);
+    let json;
+    try {
+      json = await response.json();
+    } catch (error) {
+      throw new ErrorServerResponse(response.status, response.statusText);
     }
-    throw new Error(`${response.status} ${response.statusText}`);
+    if (response.ok) return json;
+    throw new ErrorServerResponse(response.status, response.statusText, json);
   }
 
   /**
-   * Get user information
-   * @namespace GitHubSDK
+   * Get user details
    * @method getUser
-   * @inner
    *
-   * @param {String} login
-   * @return {Promise}
+   * @throws {ValidationError}     - Error of fields validation
+   * @throws {ErrorServerResponse} - Server error
+   * @param {String}               - login
+   * @return {Promise<User>}       — user representation
    */
-  async getUser(userLogin) {
+  async getUser(login) {
+
+    Joi.validate(
+      login,
+      userSchema,
+      error => {
+        if (error !== null) throw error;
+      },
+    );
+
     const options = {
       method: 'GET',
       headers: this.headers,
     };
-    const url = `${this.urls.api}${this.urls.users}${encodeURIComponent(userLogin)}`;
+
+    const url = `${this.urls.api}users/${encodeURIComponent(login)}`;
     const response = await fetch(url, options);
-    if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
-    const json = await response.json();
-    const { login, blog, name, email, avatar_url, gravatar_id, company } = json;
-    return { login, blog, name, email, avatar_url, gravatar_id, company };
+    let json;
+    try {
+      json = await response.json();
+    } catch (error) {
+      throw new ErrorServerResponse(response.status, response.statusText);
+    }
+    if (response.ok) return json;
+    throw new ErrorServerResponse(response.status, response.statusText, json);
   }
+
+  /**
+   * Users object
+   *
+   * @namespace GitHubSDK
+   * @typedef {Users} - Users list representation
+   * @param {Array<User>} - Users list
+   */
+
+  /**
+   * User object
+   *
+   * @namespace GitHubSDK
+   * @typedef {User} User representation
+   * @see https://developer.github.com/v3/users/#response
+   */
 
   /**
    * Content object
@@ -266,7 +305,6 @@ export default class GitHubSDK {
    * @typedef {Content} Content representation
    * @see https://developer.github.com/v3/repos/contents/#response-2
    */
-
 
   /**
    * Repository object

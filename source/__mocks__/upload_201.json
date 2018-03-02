@@ -1,0 +1,47 @@
+{
+  "content": {
+    "name": "README.md",
+    "path": "README.md",
+    "sha": "8a38d58c1963b9548328ca7f508102e879457dff",
+    "size": 7,
+    "url": "https://api.github.com/repos/FrontenderMagazine/article/contents/README.md?ref=master",
+    "html_url": "https://github.com/FrontenderMagazine/article/blob/master/README.md",
+    "git_url": "https://api.github.com/repos/FrontenderMagazine/article/git/blobs/8a38d58c1963b9548328ca7f508102e879457dff",
+    "download_url": "https://raw.githubusercontent.com/FrontenderMagazine/article/master/README.md",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/FrontenderMagazine/article/contents/README.md?ref=master",
+      "git": "https://api.github.com/repos/FrontenderMagazine/article/git/blobs/8a38d58c1963b9548328ca7f508102e879457dff",
+      "html": "https://github.com/FrontenderMagazine/article/blob/master/README.md"
+    }
+  },
+  "commit": {
+    "sha": "bf2f4625384a77e0e6e6d6dd83ba35ba85b8d9b0",
+    "url": "https://api.github.com/repos/FrontenderMagazine/article/git/commits/bf2f4625384a77e0e6e6d6dd83ba35ba85b8d9b0",
+    "html_url": "https://github.com/FrontenderMagazine/article/commit/bf2f4625384a77e0e6e6d6dd83ba35ba85b8d9b0",
+    "author": {
+      "name": "SilentImp",
+      "email": "thesilentimp@gmail.com",
+      "date": "2018-03-02T19:18:57Z"
+    },
+    "committer": {
+      "name": "SilentImp",
+      "email": "thesilentimp@gmail.com",
+      "date": "2018-03-02T19:18:57Z"
+    },
+    "tree": {
+      "sha": "36637745186f10b8dce5b7b16c4f78784e7e3b2a",
+      "url": "https://api.github.com/repos/FrontenderMagazine/article/git/trees/36637745186f10b8dce5b7b16c4f78784e7e3b2a"
+    },
+    "message": "Uploaded README.md",
+    "parents": [
+
+    ],
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null
+    }
+  }
+}
