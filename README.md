@@ -14,15 +14,15 @@ JavaScript SDK for [Github API](https://developer.github.com/v3/). Contain only 
 
 -   [ErrorServerResponse](#errorserverresponse)
 -   [GitHubSDK](#githubsdk)
-    -   [message](#message)
 -   [upload](#upload)
 -   [create](#create)
 -   [searchForUsers](#searchforusers)
 -   [searchForUser](#searchforuser)
--   [Repository](#repository)
 -   [getUser](#getuser)
+-   [null-null](#null-null)
+-   [User](#user)
 -   [Content](#content)
--   [ValidationError](#validationerror)
+-   [Repository](#repository)
 
 ## ErrorServerResponse
 
@@ -43,10 +43,6 @@ SDK for GitHub API
 **Parameters**
 
 -   `token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** github app token
-
-### message
-
-Messages of GitHub SDK
 
 ## upload
 
@@ -108,7 +104,7 @@ import GitHubSDK from '@frontender-magazine/github-sdk';
 })();
 ```
 
--   Throws **[ValidationError](#validationerror)** Error of fields validation
+-   Throws **ValidationError** Error of fields validation
 -   Throws **[ErrorServerResponse](#errorserverresponse)** Server error
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Content](#content)>** uploaded content data
@@ -126,7 +122,7 @@ Create repository in the organization
     -   `props.org` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Organization name
 
 
--   Throws **[ValidationError](#validationerror)** Error of fields validation
+-   Throws **ValidationError** Error of fields validation
 -   Throws **[ErrorServerResponse](#errorserverresponse)** Server error
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Repository](#repository)>** Repository object
@@ -137,9 +133,13 @@ Search for users
 
 **Parameters**
 
--   `keywords` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** 
+-   `null-null` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** Keywords
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
+
+-   Throws **ValidationError** Error of fields validation
+-   Throws **[ErrorServerResponse](#errorserverresponse)** Server error
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;Users>** 
 
 ## searchForUser
 
@@ -149,25 +149,43 @@ Search for user
 
 -   `keyword` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
+
+-   Throws **ValidationError** Error of fields validation
+-   Throws **[ErrorServerResponse](#errorserverresponse)** Server error
+
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
-
-## Repository
-
--   **See: <https://developer.github.com/v3/repos/#response-2>**
-
-Repository object
-
-Type: [Repository](#repository)
 
 ## getUser
 
-Get user information
+Get user details
 
 **Parameters**
 
--   `login` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `null-null` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** login
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** 
+
+-   Throws **ValidationError** Error of fields validation
+-   Throws **[ErrorServerResponse](#errorserverresponse)** Server error
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[User](#user)>** — user representation
+
+## null-null
+
+Users object
+
+Type: Users
+
+**Parameters**
+
+-   `null-null` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[User](#user)>** Users list
+
+## User
+
+-   **See: <https://developer.github.com/v3/users/#response>**
+
+User object
+
+Type: [User](#user)
 
 ## Content
 
@@ -177,12 +195,10 @@ Content object
 
 Type: [Content](#content)
 
-## ValidationError
+## Repository
 
-Custom error message for validation error
+-   **See: <https://developer.github.com/v3/repos/#response-2>**
 
-**Parameters**
+Repository object
 
--   `statusCode` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** http status code
--   `statusText` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** http status code text
--   `message` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) | null)** error details (optional, default `null`)
+Type: [Repository](#repository)
