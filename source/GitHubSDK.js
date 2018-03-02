@@ -189,8 +189,8 @@ export default class GitHubSDK {
    *
    * @throws {ValidationError}     - Error of fields validation
    * @throws {ErrorServerResponse} - Server error
-   * @param {Array<string>}        - Keywords
-   * @return {Promise<Users>}
+   * @param {Array<string>} keywordsList - Keywords array
+   * @return {Promise<Users>} - array of users
    */
   searchForUsers(keywordsList) {
 
@@ -216,8 +216,8 @@ export default class GitHubSDK {
    *
    * @throws {ValidationError}     - Error of fields validation
    * @throws {ErrorServerResponse} - Server error
-   * @param {String} keyword
-   * @return {Promise}
+   * @param {String} keyword - login to search
+   * @return {Promise<User>} - user
    */
   async searchForUser(keyword) {
 
@@ -281,14 +281,6 @@ export default class GitHubSDK {
     if (response.ok) return json;
     throw new ErrorServerResponse(response.status, response.statusText, json);
   }
-
-  /**
-   * Users object
-   *
-   * @namespace GitHubSDK
-   * @typedef {Users} - Users list representation
-   * @param {Array<User>} - Users list
-   */
 
   /**
    * User object
