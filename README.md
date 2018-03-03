@@ -120,6 +120,26 @@ Create repository in the organization
     -   `props.homepage` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Link to some related resourse (optional, default `null`)
     -   `props.org` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)?** Organization name
 
+**Examples**
+
+_Create repository_
+
+```javascript
+import GitHubSDK from '@frontender-magazine/github-sdk';
+(async()=>{
+  try {
+    const github = new GitHubSDK('b8f921864bd9a9fb6585b10e6534baa37c4d45fe');
+    const results = await github.create({
+      name: 'owning-the-role-of-the-front-end-developer',
+      description: 'Owning the Role of the Front-End Developer',
+      homepage: 'http://alistapart.com/article/owning-the-role-of-the-front-end-developer',
+      org: 'FrontenderMagazine',
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+})();
+```
 
 -   Throws **ValidationError** Error of fields validation
 -   Throws **[ErrorServerResponse](#errorserverresponse)** Server error
@@ -134,6 +154,21 @@ Search for users
 
 -   `keywordsList` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** Keywords array
 
+**Examples**
+
+_Search for users_
+
+```javascript
+import GitHubSDK from '@frontender-magazine/github-sdk';
+(async()=>{
+  try {
+    const github = new GitHubSDK('b8f921864bd9a9fb6585b10e6534baa37c4d45fe');
+    const results = await github.searchForUsers(['octocat', 'silentimp']);
+  } catch (error) {
+    console.log(error.message);
+  }
+})();
+```
 
 -   Throws **ValidationError** Error of fields validation
 -   Throws **[ErrorServerResponse](#errorserverresponse)** Server error
@@ -148,6 +183,21 @@ Search for user
 
 -   `keyword` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** login to search
 
+**Examples**
+
+_Search for user_
+
+```javascript
+import GitHubSDK from '@frontender-magazine/github-sdk';
+(async()=>{
+  try {
+    const github = new GitHubSDK('b8f921864bd9a9fb6585b10e6534baa37c4d45fe');
+    const details = await github.searchForUser('octocat');
+  } catch (error) {
+    console.log(error.message);
+  }
+})();
+```
 
 -   Throws **ValidationError** Error of fields validation
 -   Throws **[ErrorServerResponse](#errorserverresponse)** Server error
@@ -160,8 +210,23 @@ Get user details
 
 **Parameters**
 
--   `null-null` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** login
+-   `login` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** login
 
+**Examples**
+
+_Get user details_
+
+```javascript
+import GitHubSDK from '@frontender-magazine/github-sdk';
+(async()=>{
+  try {
+    const github = new GitHubSDK('b8f921864bd9a9fb6585b10e6534baa37c4d45fe');
+    const details = await github.getUser('octocat');
+  } catch (error) {
+    console.log(error.message);
+  }
+})();
+```
 
 -   Throws **ValidationError** Error of fields validation
 -   Throws **[ErrorServerResponse](#errorserverresponse)** Server error

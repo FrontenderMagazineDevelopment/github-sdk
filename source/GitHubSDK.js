@@ -148,6 +148,22 @@ export default class GitHubSDK {
    * @param  {string}  [props.homepage=null]          - Link to some related resourse
    * @param  {string}  [props.org]                    - Organization name
    * @return {Promise<Repository>}                    - Repository object
+   *
+   * @example <caption>Create repository</caption>
+   * import GitHubSDK from '@frontender-magazine/github-sdk';
+   * (async()=>{
+   *   try {
+   *     const github = new GitHubSDK('b8f921864bd9a9fb6585b10e6534baa37c4d45fe');
+   *     const results = await github.create({
+   *       name: 'owning-the-role-of-the-front-end-developer',
+   *       description: 'Owning the Role of the Front-End Developer',
+   *       homepage: 'http://alistapart.com/article/owning-the-role-of-the-front-end-developer',
+   *       org: 'FrontenderMagazine',
+   *     });
+   *   } catch (error) {
+   *     console.log(error.message);
+   *   }
+   * })();
    */
   async create(props) {
 
@@ -191,6 +207,17 @@ export default class GitHubSDK {
    * @throws {ErrorServerResponse} - Server error
    * @param {Array<string>} keywordsList - Keywords array
    * @return {Promise<Users>} - array of users
+   *
+   * @example <caption>Search for users</caption>
+   * import GitHubSDK from '@frontender-magazine/github-sdk';
+   * (async()=>{
+   *   try {
+   *     const github = new GitHubSDK('b8f921864bd9a9fb6585b10e6534baa37c4d45fe');
+   *     const results = await github.searchForUsers(['octocat', 'silentimp']);
+   *   } catch (error) {
+   *     console.log(error.message);
+   *   }
+   * })();
    */
   searchForUsers(keywordsList) {
 
@@ -218,6 +245,17 @@ export default class GitHubSDK {
    * @throws {ErrorServerResponse} - Server error
    * @param {String} keyword - login to search
    * @return {Promise<User>} - user
+   *
+   * @example <caption>Search for user</caption>
+   * import GitHubSDK from '@frontender-magazine/github-sdk';
+   * (async()=>{
+   *   try {
+   *     const github = new GitHubSDK('b8f921864bd9a9fb6585b10e6534baa37c4d45fe');
+   *     const details = await github.searchForUser('octocat');
+   *   } catch (error) {
+   *     console.log(error.message);
+   *   }
+   * })();
    */
   async searchForUser(keyword) {
 
@@ -252,8 +290,19 @@ export default class GitHubSDK {
    *
    * @throws {ValidationError}     - Error of fields validation
    * @throws {ErrorServerResponse} - Server error
-   * @param {String}               - login
+   * @param {String} login         - login
    * @return {Promise<User>}       — user representation
+   *
+   * @example <caption>Get user details</caption>
+   * import GitHubSDK from '@frontender-magazine/github-sdk';
+   * (async()=>{
+   *   try {
+   *     const github = new GitHubSDK('b8f921864bd9a9fb6585b10e6534baa37c4d45fe');
+   *     const details = await github.getUser('octocat');
+   *   } catch (error) {
+   *     console.log(error.message);
+   *   }
+   * })();
    */
   async getUser(login) {
 

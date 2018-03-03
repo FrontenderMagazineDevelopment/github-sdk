@@ -594,6 +594,26 @@
   
 
   
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      <p><p>Create repository</p>
+</p>
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> GitHubSDK <span class="hljs-keyword">from</span> <span class="hljs-string">'@frontender-magazine/github-sdk'</span>;
+<span class="hljs-function">(<span class="hljs-params"><span class="hljs-keyword">async</span>(</span>)=&gt;</span>{
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> github = <span class="hljs-keyword">new</span> GitHubSDK(<span class="hljs-string">'b8f921864bd9a9fb6585b10e6534baa37c4d45fe'</span>);
+    <span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> github.create({
+      <span class="hljs-attr">name</span>: <span class="hljs-string">'owning-the-role-of-the-front-end-developer'</span>,
+      <span class="hljs-attr">description</span>: <span class="hljs-string">'Owning the Role of the Front-End Developer'</span>,
+      <span class="hljs-attr">homepage</span>: <span class="hljs-string">'http://alistapart.com/article/owning-the-role-of-the-front-end-developer'</span>,
+      <span class="hljs-attr">org</span>: <span class="hljs-string">'FrontenderMagazine'</span>,
+    });
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-built_in">console</span>.log(error.message);
+  }
+})();</pre>
+    
+  
 
   
 
@@ -673,6 +693,21 @@
     </ul>
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      <p><p>Search for users</p>
+</p>
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> GitHubSDK <span class="hljs-keyword">from</span> <span class="hljs-string">'@frontender-magazine/github-sdk'</span>;
+<span class="hljs-function">(<span class="hljs-params"><span class="hljs-keyword">async</span>(</span>)=&gt;</span>{
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> github = <span class="hljs-keyword">new</span> GitHubSDK(<span class="hljs-string">'b8f921864bd9a9fb6585b10e6534baa37c4d45fe'</span>);
+    <span class="hljs-keyword">const</span> results = <span class="hljs-keyword">await</span> github.searchForUsers([<span class="hljs-string">'octocat'</span>, <span class="hljs-string">'silentimp'</span>]);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-built_in">console</span>.log(error.message);
+  }
+})();</pre>
+    
   
 
   
@@ -754,6 +789,21 @@
   
 
   
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      <p><p>Search for user</p>
+</p>
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> GitHubSDK <span class="hljs-keyword">from</span> <span class="hljs-string">'@frontender-magazine/github-sdk'</span>;
+<span class="hljs-function">(<span class="hljs-params"><span class="hljs-keyword">async</span>(</span>)=&gt;</span>{
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> github = <span class="hljs-keyword">new</span> GitHubSDK(<span class="hljs-string">'b8f921864bd9a9fb6585b10e6534baa37c4d45fe'</span>);
+    <span class="hljs-keyword">const</span> details = <span class="hljs-keyword">await</span> github.searchForUser(<span class="hljs-string">'octocat'</span>);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-built_in">console</span>.log(error.message);
+  }
+})();</pre>
+    
+  
 
   
 
@@ -781,7 +831,7 @@
   <p>Get user details</p>
 
 
-  <div class='pre p1 fill-light mt0'>getUser(null-null: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#user">User</a>></div>
+  <div class='pre p1 fill-light mt0'>getUser(login: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>&#x3C;<a href="#user">User</a>></div>
   
   
 
@@ -798,7 +848,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>null-null</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+            <span class='code bold'>login</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
 	    login
 
           </div>
@@ -833,6 +883,21 @@
     </ul>
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      <p><p>Get user details</p>
+</p>
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">import</span> GitHubSDK <span class="hljs-keyword">from</span> <span class="hljs-string">'@frontender-magazine/github-sdk'</span>;
+<span class="hljs-function">(<span class="hljs-params"><span class="hljs-keyword">async</span>(</span>)=&gt;</span>{
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> github = <span class="hljs-keyword">new</span> GitHubSDK(<span class="hljs-string">'b8f921864bd9a9fb6585b10e6534baa37c4d45fe'</span>);
+    <span class="hljs-keyword">const</span> details = <span class="hljs-keyword">await</span> github.getUser(<span class="hljs-string">'octocat'</span>);
+  } <span class="hljs-keyword">catch</span> (error) {
+    <span class="hljs-built_in">console</span>.log(error.message);
+  }
+})();</pre>
+    
   
 
   
