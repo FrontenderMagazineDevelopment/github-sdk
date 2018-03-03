@@ -1,6 +1,6 @@
 {
   "name": "@frontender-magazine/github-sdk",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Operations on github",
   "main": "lib/GitHubSDK.js",
   "scripts": {
