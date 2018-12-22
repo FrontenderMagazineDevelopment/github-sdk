@@ -1,3 +1,6 @@
+# Depricated in favor of [official github api](https://github.com/octokit/rest.js)
+
+
 # Github API SDK
 
 JavaScript SDK for [Github API](https://developer.github.com/v3/). Contain only requests I actually need.
